@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmlincludejs"></script>
+
+    <title>Editor de Artigos</title>
+</head>
+
+
+<include src="./styles/styles.html"></include>
+
+
+<body>
+
+    <nav style="display: flex; justify-content: left; padding: 10px;">
+        <div class="nav-bread">
+            <p>thom</p>
+        </div>
+        <div class="nav-bread">
+            <p>artigos / artigo-1</p>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="container-content">
+            <article id="article-data">
+
+            </article>
+        </div>
+    </div>
+
+    <div class="float-btn">
+        <button id="form-btn" onclick="showAddForm()">
+            Criar +
+        </button>
+    </div>
+
+    <div id="form-container" class="form-container">
+        <div class="form-content">
+
+            <div class="btn-fields">
+                <p>Texto</p>
+                <button>
+                    <div onclick="showParagrafoForm()" class="btn-opts">
+                        <h3>Parágrafo</h3>
+                        <p>Adicione um parágrafo ao texto</p>
+                    </div>
+                </button>
+            </div>
+            <hr id="separator">
+            <div class="btn-fields">
+                <p>basics</p>
+                <button>
+                    <div onclick="showImgForm()" class="btn-opts">
+                        <h3>Imagem</h3>
+                        <p>Envie uma imagem</p>
+                    </div>
+                </button>
+                <br>
+                <button>
+                    <div onclick="createLine()" class="btn-opts">
+                        <h3>Separador</h3>
+                        <p>Criar uma linha</p>
+                    </div>
+                </button>
+                <div id="close-form" onclick="closeForm()" class="btn-opts">
+                    <h4 style="color: crimson">Fechar</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="form-paragraph" class="form-paragraph">
+        <div class="form-paragraph-container">
+            <div class="input-paragraph">
+                <h2>Adicione seu bloco de texto aqui</h2>
+                <textarea name="" id="txtParagrafo" cols="30" rows="10"></textarea>
+                <button onclick="createParagrafo()">Adicionar Parágrafo</button>
+                <button class="close-btn" onclick="closeForm()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form-img" class="form-paragraph">
+        <div class="form-paragraph-container">
+            <div class="input-paragraph">
+                <h2>Insira o link da Imagem</h2>
+                <input type="text" name="" id="txtImg">
+                <br>
+                <button onclick="createImg()">Adicionar Imagem</button>
+                <button class="close-btn" onclick="closeForm()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+    var formBtn = document.getElementById('form-btn')
+    var formContainer = document.getElementById('form-container')
+    var formParagrafo = document.getElementById('form-paragraph')
+    var fomrImg = document.getElementById('form-img')
+    var txtParagrafo = document.getElementById('txtParagrafo')
+    var txtImg = document.getElementById('txtImg')
+
+
+    function showAddForm() {
+        formContainer.style.display = 'block'
+    }
+
+    function closeForm() {
+        formContainer.style.display = 'none'
+        formParagrafo.style.display = 'none'
+        fomrImg.style.display = 'none'
+    }
+
+    function showParagrafoForm() {
+        formParagrafo.style.display = 'flex'
+    }
+
+    function showImgForm() {
+        fomrImg.style.display = 'flex'
+    }
+
+
+    function createParagrafo() {
+
+        var txt = txtParagrafo.value
+
+        const objeto = {
+            id: 4,
+            type: 'paragraph',
+            content: txt
+        };
+
+        fetch('/enviar-dados', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(objeto)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data); // exibe a resposta do servidor
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        formParagrafo.style.display = 'none'
+        closeForm()
+        document.location.reload()
+    }
+
+    function createLine() {
+
+        const objeto = {
+            id: 4,
+            type: 'line',
+        };
+
+        fetch('/enviar-dados', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(objeto)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data); // exibe a resposta do servidor
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        closeForm()
+        document.location.reload()
+
+    }
+
+    function createImg() {
+
+        const objeto = {
+            id: 4,
+            type: 'img',
+            content: txtImg.value
+        };
+
+        fetch('/enviar-dados', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(objeto)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data); // exibe a resposta do servidor
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        fomrImg.style.display = 'none'
+        closeForm()
+        document.location.reload()
+
+    }
+
+
+    // faz a requisição para obter as informações do artigo
+    fetch('/api/getArticle?id=1')
+        .then(response => response.json())
+        .then(data => {
+            // atualiza o conteúdo do elemento HTML com as informações do artigo
+            for (var i = 0; i < data.length; i++) {
+
+                if (data[i].type == "title") {
+
+                    var title = document.createElement('h1')
+                    var optionsbtn = document.createElement('span')
+                    title.innerText = data[i].content
+                    document.getElementById('article-data').appendChild(title)
+
+                } else if (data[i].type == "paragraph") {
+
+                    var currentsection = document.createElement('section')
+                    var buttonsContainer = document.createElement('section')
+                    var paragraph = document.createElement('p')
+                    var optionsbtn = document.createElement('span')
+                    var optionsedit = document.createElement('span')
+
+                    buttonsContainer.classList.add('buttonsContainer')
+
+                    optionsbtn.innerHTML = '<b>excluir</b>'
+                    optionsedit.innerHTML = '<b>editar</b>'
+
+                    paragraph.innerText = data[i].content
+                    document.getElementById('article-data').appendChild(currentsection)
+                    currentsection.appendChild(paragraph)
+
+                    currentsection.appendChild(buttonsContainer)
+                    buttonsContainer.appendChild(optionsbtn)
+                    buttonsContainer.appendChild(optionsedit)
+
+
+                } else if (data[i].type == "img") {
+
+                    var buttonsContainer = document.createElement('section')
+                    var image = document.createElement('img')
+                    var currentsection = document.createElement('section')
+                    var optionsbtn = document.createElement('span')
+                    var optionsedit = document.createElement('span')
+                    buttonsContainer.classList.add('buttonsContainer')
+                    optionsbtn.innerHTML = '<b>excluir</b>'
+                    optionsedit.innerHTML = '<b>editar</b>'
+                    image.src = data[i].content
+                    document.getElementById('article-data').appendChild(currentsection)
+                    currentsection.appendChild(image)
+
+                    currentsection.appendChild(buttonsContainer)
+                    buttonsContainer.appendChild(optionsbtn)
+                    buttonsContainer.appendChild(optionsedit)
+
+
+
+                } else if (data[i].type == "line") {
+
+                    var buttonsContainer = document.createElement('section')
+                    var hr = document.createElement('hr')
+                    var currentsection = document.createElement('section')
+                    var optionsbtn = document.createElement('span')
+                    var optionsedit = document.createElement('span')
+                    buttonsContainer.classList.add('buttonsContainer')
+                    optionsbtn.innerHTML = '<b>excluir</b>'
+                   
+                    document.getElementById('article-data').appendChild(currentsection)
+                    currentsection.appendChild(hr)
+
+                    currentsection.appendChild(buttonsContainer)
+                    buttonsContainer.appendChild(optionsbtn)
+                  
+
+                }
+
+            }
+        })
+        .catch(error => console.error(error));
+</script>
+
+
+</html>

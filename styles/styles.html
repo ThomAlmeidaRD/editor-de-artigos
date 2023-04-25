@@ -1,0 +1,281 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit&family=Lato&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Kanit&family=Lato&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+    * {
+        margin: 0px;
+        padding: 0px;
+
+        font-family: 'Lato', sans-serif;
+    }
+
+    .container {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container-content {
+        padding: 20px;
+        width: 50%;
+    }
+
+    .nav-bread {
+        background: #d5d5d5;
+        padding: 5px 20px;
+        border-radius: 10px;
+        font-size: 13pt;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    article h1 {
+        padding-bottom: 30px;
+        font-size: 2em;
+    }
+
+    article p {
+        font-size: 1.5em;
+        color: gray;
+        line-height: 36px;
+        padding: 10px 0px;
+        font-family: 'Source Serif Pro', serif;
+    }
+
+    article img {
+        margin: 20px 0px;
+        width: 100%;
+
+    }
+
+    button.close-btn {
+        background: #343434;
+        /* border: 1px solid; */
+        color: #ffffff;
+    }
+
+    input#h1-change {
+        margin-left: 10px;
+        border: none;
+        font-size: 12pt;
+    }
+
+    #h1-change:focus {
+        outline: none;
+    }
+
+    .float-btn {
+        position: fixed;
+        z-index: 11;
+        right: 100px;
+        bottom: 165px;
+    }
+
+    .float-btn button {
+        padding: 20px;
+        border: none;
+        background: #000000e0;
+        box-shadow: 1px 2px 4px #333;
+        border-radius: 5px;
+        width: 100px;
+        font-size: 12pt;
+        cursor: pointer;
+        font-weight: bold;
+        color: #fff;
+        transition: 0.5s;
+    }
+
+
+    .float-btn button:hover {
+        transform: scale(1.07);
+    }
+
+    .form-container {
+        display: none;
+        background: #fff;
+        box-shadow: 1px 3px 4px #3333337d;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0px;
+        width: 260px;
+        position: fixed;
+        z-index: 9999;
+        bottom: 160px;
+        border-radius: 3px;
+        right: 100px;
+    }
+
+    hr {
+        margin: 10px 0px;
+    }
+
+    .btn-fields {
+        margin: 3px 0px;
+    }
+
+    .btn-fields p {
+        padding: 5px 10px;
+    }
+
+    .btn-fields button {
+        border: none;
+        background: #fff;
+        width: 100%;
+    }
+
+    .btn-opts {
+        text-align: left;
+        padding: 10px 0px;
+        cursor: pointer;
+        padding-left: 20px;
+    }
+
+    .btn-opts:hover {
+        background-color: #eee;
+    }
+
+    .form-paragraph {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 230px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        box-shadow: 6px -4px 11px #33333385;
+        z-index: 999999;
+        width: 100%;
+        background-color: #ffffff;
+        height: 80vh;
+    }
+
+    .form-paragraph-container {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    textarea {
+        width: 90%;
+        height: 30vh;
+        border: 1px solid #787878;
+        margin: 10px 0px;
+        border-radius: 5px;
+        padding: 20px;
+        resize: none;
+        font-size: 16pt;
+    }
+
+    .input-paragraph {
+        padding: 20px;
+        width: 100%;
+    }
+
+
+    .input-paragraph button {
+        padding: 20px;
+        width: 300px;
+        border: none;
+        font-size: 14pt;
+        background: rgb(0, 0, 0);
+        color: #fff;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+
+    .input-paragraph h2 {
+        color: #000;
+        padding-bottom: 20px;
+        font-size: 22pt;
+    }
+
+
+    #txtImg {
+        padding: 20px;
+        margin: 20px 0px;
+        width: 90%;
+        border-radius: 5px;
+        border: 1px solid #747474;
+        font-size: 14pt;
+    }
+
+    .buttonsContainer {
+        background: transparent;
+        color: transparent;
+        padding: 2px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        border-radius: 10px;
+
+    }
+
+    .buttonsContainer span {
+        margin: 0px 10px;
+        cursor: pointer;
+    }
+
+    .buttonsContainer:hover {
+        background: #eee;
+        color: #000;
+
+    }
+
+    body::-webkit-scrollbar {
+        width: 16px;
+        /* width of the entire scrollbar */
+    }
+
+    body::-webkit-scrollbar-track {
+        background: #3333339a;
+        /* color of the tracking area */
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #000;
+        /* color of the scroll thumb */
+        border-radius: 10px;
+        /* roundness of the scroll thumb */
+
+        /* creates padding around scroll thumb */
+    }
+
+
+    @media only screen and (max-width: 912px) {
+
+        .container-content {
+
+            width: 95%;
+        }
+
+        .form-paragraph-container {
+            width: 95%;
+        }
+
+        .float-btn button {
+            width: 200px;
+            height: 100px;
+            font-size: 16pt;
+        }
+
+        .input-paragraph button {
+            width: 100%;
+            margin: 10px;
+        }
+
+        textarea {
+            width: 95%;
+        }
+
+        #txtImg{
+            width: 95%;
+        }
+
+    }
+</style>
